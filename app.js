@@ -31,3 +31,9 @@ newTodo.addEventListener("submit", function(e){
     newRemoveBtn.className = "remove";
     todoList.appendChild(newTask);
 })
+
+let todos = document.querySelectorAll('li');
+
+for (let todo of todos){
+    localStorage.setItem('todo', JSON.stringify(todo));
+}

@@ -1,6 +1,19 @@
 const newTodo = document.querySelector('#newTodo');
 const todoList = document.querySelector('.todoList');
 const taskInput = document.querySelector('#addTodo');
+let storedTodos = [];
+
+let getTodos = (JSON.parse(localStorage.getItem("storedList")));
+
+for (retrieved of getTodos){
+    storedTodos.push(retrieved);
+}
+
+for (let storedTodo of storedTodos){
+    let storedTask = document.createElement("li");
+    storedTask.innerHTML = storedTodo;
+    todoList.appendChild(storedTask);
+}
 
 todoList.addEventListener("click", function(e){
    if (e.target.checked === true){
@@ -13,7 +26,15 @@ todoList.addEventListener("click", function(e){
 
 todoList.addEventListener("click", function(e){
    if (e.target.tagName === "BUTTON"){
-    e.target.parentElement.remove();}
+    e.target.parentElement.remove();
+        for (let todo of storedTodos){
+            if (storedTodos.includes(e.target.parentElement.innerHTML)){
+            storedTodos.splice(storedTodos.indexOf[todo], 1)
+            localStorage.clear();
+            localStorage.setItem("storedList", JSON.stringify(storedTodos));
+            }
+        }
+    }   
 })
 
 newTodo.addEventListener("submit", function(e){
@@ -30,10 +51,6 @@ newTodo.addEventListener("submit", function(e){
     newRemoveBtn.innerText = 'x';
     newRemoveBtn.className = "remove";
     todoList.appendChild(newTask);
+    storedTodos.push(newTask.innerHTML);
+    localStorage.setItem("storedList", JSON.stringify(storedTodos));
 })
-
-let todos = document.querySelectorAll('li');
-
-for (let todo of todos){
-    localStorage.setItem('todo', JSON.stringify(todo));
-}

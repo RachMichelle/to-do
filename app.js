@@ -1,13 +1,21 @@
 const newTodo = document.querySelector('#newTodo');
 const todoList = document.querySelector('.todoList');
+let completeList = document.querySelector('.done');
 const taskInput = document.querySelector('#addTodo');
 let storedTodos = [];
+let storedComplete = [];
+const box = document.querySelectorAll("input[type='checkbox']")
 
 let getTodos = (JSON.parse(localStorage.getItem("storedList")));
+// let getDones = (JSON.parse(localStorage.getItem('storedDones')));
 
-for (retrieved of getTodos){
+for (let retrieved of getTodos){
     storedTodos.push(retrieved);
 }
+
+// for (let done of getDones){
+//     storedComplete.push(done);
+// }
 
 for (let storedTodo of storedTodos){
     let storedTask = document.createElement("li");
@@ -15,14 +23,29 @@ for (let storedTodo of storedTodos){
     todoList.appendChild(storedTask);
 }
 
+// for (let storedDone of storedComplete){
+//     let storedDoneTask = document.createElement("li");
+//     storedDoneTask.innerHTML = storedDone;
+//     completeList.appendChild(storedDoneTask);
+// }
+
 todoList.addEventListener("click", function(e){
    if (e.target.checked === true){
-    e.target.parentElement.className = "clicked";
+    newDone = document.createElement('li');
+    newDone.innerHTML = e.target.parentElement.innerHTML;
+    newDone.classList.add("complete");
+    e.target.parentElement.remove();
+    completeList.appendChild(newDone);
+    document.querySelector('.complete > input[type="checkbox"]').checked=true;
+    // e.target.parentElement.className = "clicked";
+    // e.target.classList.add("checked")
    }
-   else {
-    e.target.parentElement.className = '';
-   }
+//    else {
+//     e.target.parentElement.className = '';
+//     e.target.classList.remove("checked");
+//    }
 })
+
 
 todoList.addEventListener("click", function(e){
    if (e.target.tagName === "BUTTON"){
@@ -35,6 +58,23 @@ todoList.addEventListener("click", function(e){
             }
         }
     }   
+})
+
+completeList.addEventListener("click", function(e){
+    if (e.target.tagName === "BUTTON"){
+        e.target.parentElement.remove();
+    }
+})
+
+completeList.addEventListener("click", function(e){
+    if (e.target.checked === false){
+        undoDone = document.createElement('li');
+        undoDone.innerHTML = e.target.parentElement.innerHTML;
+        undoDone.classList.remove("complete");
+        e.target.parentElement.remove();
+        todoList.appendChild(undoDone);
+        // document.querySelector('.todoList > input[type="checkbox"]').checked=false;
+    }
 })
 
 newTodo.addEventListener("submit", function(e){

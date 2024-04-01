@@ -1,5 +1,6 @@
 body{
     background-color: rgb(157, 119, 167);
+
 }
 
 #submit{
@@ -34,7 +35,14 @@ ul{
     font-family: Montserrat;
 }
 
-.clicked{
+/* .clicked{
     text-decoration-line: line-through;
+} */
+
+h2{
+    font-family:Montserrat;
 }
 
+.done {
+    text-decoration-line: line-through;
+}

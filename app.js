@@ -41,7 +41,7 @@ todoList.addEventListener("click", function(e){
     for (let item of storedTodos){
         if (storedTodos.includes(e.target.parentElement.innerHTML)){
             storedTodos.splice(storedTodos.indexOf[item], 1);
-            localStorage.clear();
+            localStorage.removeItem("storedList");
             localStorage.setItem("storedList", JSON.stringify(storedTodos));
         }
     }
@@ -71,7 +71,8 @@ todoList.addEventListener("click", function(e){
         for (let todo of storedTodos){
             if (storedTodos.includes(e.target.parentElement.innerHTML)){
             storedTodos.splice(storedTodos.indexOf[todo], 1)
-            localStorage.clear();
+            localStorage.removeItem("storedList");
+            localStorage.removeItem("storedDones");
             localStorage.setItem("storedList", JSON.stringify(storedTodos));
             localStorage.setItem("storedDones", JSON.stringify(storedComplete));
             }
@@ -85,7 +86,8 @@ completeList.addEventListener("click", function(e){
         for (let deleted of storedComplete){
             if (storedComplete.includes(e.target.parentElement.innerHTML)){
                 storedComplete.splice(storedComplete.indexOf[deleted], 1);
-                localStorage.clear();
+                localStorage.removeItem("storedDones");
+                localStorage.removeItem("storedList");
                 localStorage.setItem("storedDones", JSON.stringify(storedComplete));
                 localStorage.setItem("storedList", JSON.stringify(storedTodos));
             }
@@ -98,7 +100,7 @@ completeList.addEventListener("click", function(e){
         for (let undo of storedComplete){
             if (storedComplete.includes(e.target.parentElement.innerHTML)){
                 storedComplete.splice(storedComplete.indexOf[undo], 1);
-                localStorage.clear();
+                localStorage.removeItem("storedDones");
                 localStorage.setItem("storedDones", JSON.stringify(storedComplete));
             }
         }
